@@ -1,0 +1,5 @@
+.vagrant/
+do_zrobienia.txt
+__pycache__/
+migrations/
+instance/
