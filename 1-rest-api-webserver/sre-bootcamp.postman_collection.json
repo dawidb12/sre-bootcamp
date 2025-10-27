@@ -1,0 +1,130 @@
+{
+	"info": {
+		"_postman_id": "e2949f61-59af-462d-9c37-90f153a96118",
+		"name": "sre-bootcamp",
+		"description": "API calls to my flask application made for sre-bootcamp ([https://one2n.io/sre-bootcamp](https://one2n.io/sre-bootcamp)).",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19016048"
+	},
+	"item": [
+		{
+			"name": "List students",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/data",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"data"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get info about a student",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/data/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"data",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add a new student",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"student_id\": 3,\n  \"name\": \"Adam Malysz\",\n  \"age\": 44,\n  \"field\": \"skijumping\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/data/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"data",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit the student",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Adam Malysz\",\n  \"age\": 48,\n  \"field\": \"skijumping\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/data/4/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"data",
+						"4",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete the student",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/data/3/delete",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"data",
+						"3",
+						"delete"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
