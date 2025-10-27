@@ -50,15 +50,41 @@ def create():
 @app.route('/data')
 def RetrieveList():
     students = StudentModel.query.all()
-    return render_template('datalist.html',students = students)
+    if request.accept_mimetypes['application/json'] >= request.accept_mimetypes['text/html']:
+        students_list = [
+                    {
+                        "id": student.id,
+                        "name": student.name
+                    }
+                    for student in students
+                ]
+        return jsonify(students_list)
+    else:
+        return render_template('datalist.html',students = students)
  
  
 @app.route('/data/<int:id>')
 def RetrieveEmployee(id):
     student = StudentModel.query.filter_by(student_id=id).first()
     if student:
-        return render_template('data.html', student = student)
-    return f"Student with id ={id} does not exist"
+        if request.accept_mimetypes['application/json'] >= request.accept_mimetypes['text/html']:
+            student_info = {
+                "id": student.id,
+                "name": student.name,
+                "age": student.age,
+                "field": student.field
+            }
+            return jsonify(student_info)
+        else:        
+            return render_template('data.html', student = student)
+    else:
+        if request.accept_mimetypes['application/json'] >= request.accept_mimetypes['text/html']:
+            err_info = {
+                "message": f"Student with id {id} does not exists"
+            }
+            return jsonify(err_info)
+        else:
+            return f"Student with id {id} does not exist"
  
  
 @app.route('/data/<int:id>/update',methods = ['GET','POST'])
@@ -68,15 +94,35 @@ def update(id):
         if student:
             db.session.delete(student)
             db.session.commit()
-            name = request.form['name']
-            age = request.form['age']
-            field = request.form['field']
+            if request.is_json:
+                data = request.get_json()
+                name = data['name']
+                age = data['age']
+                field = data['field']
+            else:
+                name = request.form['name']
+                age = request.form['age']
+                field = request.form['field']
             student = StudentModel(student_id=id, name=name, age=age, field = field)
             db.session.add(student)
             db.session.commit()
-            return redirect(f'/data/{id}')
-        return f"Student with id = {id} does not exist"
- 
+            if request.accept_mimetypes['application/json'] >= request.accept_mimetypes['text/html']:
+                student_info = {
+                "id": student.id,
+                "name": student.name,
+                "age": student.age,
+                "field": student.field
+                }
+                return jsonify(student_info)
+            else:
+                return redirect(f'/data/{id}')
+        if request.accept_mimetypes['application/json'] >= request.accept_mimetypes['text/html']:
+            err_info = {
+                "message": f"Student with id {id} does not exists"
+            }
+            return jsonify(err_info)
+        else:
+            return f"Student with id {id} does not exist"
     return render_template('update.html', student = student)
  
  
@@ -87,9 +133,26 @@ def delete(id):
         if student:
             db.session.delete(student)
             db.session.commit()
-            return redirect('/data')
-        abort(404)
- 
+            students = StudentModel.query.all()
+            if request.accept_mimetypes['application/json'] >= request.accept_mimetypes['text/html']:
+                students_list = [
+                    {
+                        "id": student.id,
+                        "name": student.name
+                    }
+                    for student in students
+                ]
+                return jsonify(students_list)
+            else:
+                return redirect('/data')
+        else:
+            if request.accept_mimetypes['application/json'] >= request.accept_mimetypes['text/html']:
+                err_info = {
+                "message": f"Student with id {id} does not exists"
+                }
+                return jsonify(err_info)
+            else:
+                abort(404)
     return render_template('delete.html')
  
 app.run(host='localhost', port=5000)
