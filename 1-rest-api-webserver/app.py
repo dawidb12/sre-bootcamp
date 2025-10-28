@@ -13,7 +13,7 @@ migrate = Migrate(app, db)
 with app.app_context():
     db.create_all()
  
-@app.route('/data/create' , methods = ['GET','POST'])
+@app.route('/api/v1/data/create' , methods = ['GET','POST'])
 def create():
     if request.method == 'GET':
         return render_template('createpage.html')
@@ -44,10 +44,10 @@ def create():
                 }
             }), 201
         else:
-            return redirect('/data')
+            return redirect('/api/v1/data')
 
  
-@app.route('/data')
+@app.route('/api/v1/data')
 def RetrieveList():
     students = StudentModel.query.all()
     if request.accept_mimetypes['application/json'] >= request.accept_mimetypes['text/html']:
@@ -63,7 +63,7 @@ def RetrieveList():
         return render_template('datalist.html',students = students)
  
  
-@app.route('/data/<int:id>')
+@app.route('/api/v1/data/<int:id>')
 def RetrieveEmployee(id):
     student = StudentModel.query.filter_by(student_id=id).first()
     if student:
@@ -87,7 +87,7 @@ def RetrieveEmployee(id):
             return f"Student with id {id} does not exist"
  
  
-@app.route('/data/<int:id>/update',methods = ['GET','POST'])
+@app.route('/api/v1/data/<int:id>/update',methods = ['GET','POST'])
 def update(id):
     student = StudentModel.query.filter_by(student_id=id).first()
     if request.method == 'POST':
@@ -126,7 +126,7 @@ def update(id):
     return render_template('update.html', student = student)
  
  
-@app.route('/data/<int:id>/delete', methods=['GET','POST'])
+@app.route('/api/v1/data/<int:id>/delete', methods=['GET','POST'])
 def delete(id):
     student = StudentModel.query.filter_by(student_id=id).first()
     if request.method == 'POST':
@@ -144,7 +144,7 @@ def delete(id):
                 ]
                 return jsonify(students_list)
             else:
-                return redirect('/data')
+                return redirect('/api/v1/data')
         else:
             if request.accept_mimetypes['application/json'] >= request.accept_mimetypes['text/html']:
                 err_info = {

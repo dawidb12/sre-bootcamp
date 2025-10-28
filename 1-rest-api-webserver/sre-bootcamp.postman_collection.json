@@ -13,13 +13,15 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5000/data",
+					"raw": "http://localhost:5000/api/v1/data",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "5000",
 					"path": [
+						"api",
+						"v1",
 						"data"
 					]
 				}
@@ -32,13 +34,15 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5000/data/3",
+					"raw": "http://localhost:5000/api/v1/data/3",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "5000",
 					"path": [
+						"api",
+						"v1",
 						"data",
 						"3"
 					]
@@ -53,7 +57,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"student_id\": 3,\n  \"name\": \"Adam Malysz\",\n  \"age\": 44,\n  \"field\": \"skijumping\"\n}",
+					"raw": "{\n  \"student_id\": 4,\n  \"name\": \"Kamil Stoch\",\n  \"age\": 38,\n  \"field\": \"skijumping\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -61,13 +65,15 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5000/data/create",
+					"raw": "http://localhost:5000/api/v1/data/create",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "5000",
 					"path": [
+						"api",
+						"v1",
 						"data",
 						"create"
 					]
@@ -90,13 +96,15 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5000/data/4/update",
+					"raw": "http://localhost:5000/api/v1/data/4/update",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "5000",
 					"path": [
+						"api",
+						"v1",
 						"data",
 						"4",
 						"update"
@@ -111,13 +119,15 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5000/data/3/delete",
+					"raw": "http://localhost:5000/api/v1/data/3/delete",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "5000",
 					"path": [
+						"api",
+						"v1",
 						"data",
 						"3",
 						"delete"
