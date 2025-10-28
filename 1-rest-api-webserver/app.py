@@ -2,8 +2,19 @@ from flask import Flask,render_template,request,redirect,abort,jsonify
 from models import db,StudentModel
 from flask_migrate import Migrate
 import os
+import logging
  
 app = Flask(__name__)
+
+
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s [%(levelname)s] %(message)s',
+    handlers=[
+        logging.FileHandler("api.log"),
+        logging.StreamHandler()
+    ]
+)
  
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URI')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -49,6 +60,7 @@ def create():
  
 @app.route('/api/v1/data')
 def RetrieveList():
+    logging.info("GET /api/v1/data called")
     students = StudentModel.query.all()
     if request.accept_mimetypes['application/json'] >= request.accept_mimetypes['text/html']:
         students_list = [
@@ -58,8 +70,10 @@ def RetrieveList():
                     }
                     for student in students
                 ]
+        logging.info(f"It could be Postman's call! Returning users: {students_list}")
         return jsonify(students_list)
     else:
+        logging.info(f"Returning users: {students}")
         return render_template('datalist.html',students = students)
  
  
