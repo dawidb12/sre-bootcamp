@@ -45,6 +45,7 @@ def create():
         db.session.add(student)
         db.session.commit()
         if request.is_json:
+            logging.info(f"Student {student.name} created successfully")
             return jsonify({
                 "message": "Student created successfully",
                 "student": {
@@ -55,6 +56,7 @@ def create():
                 }
             }), 201
         else:
+            logging.info(f"Student {student.name} created successfully")
             return redirect('/api/v1/data')
 
  
@@ -88,16 +90,20 @@ def RetrieveEmployee(id):
                 "age": student.age,
                 "field": student.field
             }
+            logging.info(f"Returning student's info: {student.name}")
             return jsonify(student_info)
-        else:        
+        else:
+            logging.info(f"Returning student's info: {student.name}")
             return render_template('data.html', student = student)
     else:
         if request.accept_mimetypes['application/json'] >= request.accept_mimetypes['text/html']:
             err_info = {
                 "message": f"Student with id {id} does not exists"
             }
+            logging.info(f"Student with id {id} does not exists")
             return jsonify(err_info)
         else:
+            logging.info(f"Student with id {id} does not exists")
             return f"Student with id {id} does not exist"
  
  
@@ -127,15 +133,19 @@ def update(id):
                 "age": student.age,
                 "field": student.field
                 }
+                logging.info(f"Student {student.name} updated!")
                 return jsonify(student_info)
             else:
-                return redirect(f'/data/{id}')
+                logging.info(f"Student {student.name} updated!")
+                return redirect(f'/api/v1/data/{id}')
         if request.accept_mimetypes['application/json'] >= request.accept_mimetypes['text/html']:
             err_info = {
                 "message": f"Student with id {id} does not exists"
             }
+            logging.info(f"Student with id {id} does not exists")
             return jsonify(err_info)
         else:
+            logging.info(f"Student with id {id} does not exists")
             return f"Student with id {id} does not exist"
     return render_template('update.html', student = student)
  
@@ -147,8 +157,12 @@ def delete(id):
         if student:
             db.session.delete(student)
             db.session.commit()
+            logging.info(f"Student with id {id} deleted.")
             students = StudentModel.query.all()
             if request.accept_mimetypes['application/json'] >= request.accept_mimetypes['text/html']:
+                info = {
+                "message": f"Student with id {id} is deleted."
+                }
                 students_list = [
                     {
                         "id": student.id,
@@ -156,7 +170,10 @@ def delete(id):
                     }
                     for student in students
                 ]
-                return jsonify(students_list)
+                return jsonify({
+                    "info": info,
+                    "students_list": students_list
+                })
             else:
                 return redirect('/api/v1/data')
         else:
@@ -164,8 +181,10 @@ def delete(id):
                 err_info = {
                 "message": f"Student with id {id} does not exists"
                 }
+                logging.info(f"Student with id {id} does not exists")
                 return jsonify(err_info)
             else:
+                logging.info(f"Student with id {id} does not exists")
                 abort(404)
     return render_template('delete.html')
  
