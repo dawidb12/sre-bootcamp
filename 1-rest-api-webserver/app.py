@@ -187,5 +187,9 @@ def delete(id):
                 logging.info(f"Student with id {id} does not exists")
                 abort(404)
     return render_template('delete.html')
+
+@app.route('/api/v1/health', methods=['GET'])
+def health_check():
+    return jsonify({'status': 'healthy'}), 200
  
 app.run(host='localhost', port=5000)
