@@ -1,8 +1,11 @@
 from flask import Flask,render_template,request,redirect,abort,jsonify
 from models import db,StudentModel
 from flask_migrate import Migrate
+from dotenv import load_dotenv
 import os
 import logging
+
+load_dotenv()
  
 app = Flask(__name__)
 
