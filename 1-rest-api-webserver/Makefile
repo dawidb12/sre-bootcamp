@@ -8,3 +8,6 @@ migrate:
 
 run_server:
 	flask run
+
+run_tests:
+	pytest -v
