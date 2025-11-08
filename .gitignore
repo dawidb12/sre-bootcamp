@@ -1,5 +1,5 @@
 .vagrant/
-do_zrobienia.txt
+to_do.txt
 __pycache__/
 migrations/
 instance/
