@@ -1,17 +1,61 @@
 ## First use
 
-All you need to do is to build the docker image and run the container based on that image.
-
-1. Build the image:
+1. Before you start with testing the application, you need to ensure that docker, docker compose and make are installed. If not, run below script:
 
 ```sh
-make build_image IMAGE_VERSION=v.1.0.0
+./prepare_env.sh
 ```
 
-2. Run the container:
+This will install all needed apps.
+
+2. Run DB migrations:
 
 ```sh
-make run_container IMAGE_VERSION=v.1.0.0
+make prepare_db
 ```
 
-While running the make command, do not forget about setting the variable IMAGE_VERSION. You can define it as you like, but remember to refer to the image version that exists in the repository when running the container!
+3. Run the database container:
+
+```sh
+make run_db_container
+```
+
+4. Run the flask application container:
+
+```sh
+make run_app_container
+```
+
+## Starting/stopping the stack
+
+1. To start the whole compose, run:
+
+```sh
+make start_compose
+```
+
+2. To stop the whole compose, run:
+
+```sh
+make stop_compose
+```
+
+## Cleanup
+
+1. If you would like to cleanup the environment, run below command:
+
+```sh
+make delete_everything
+```
+
+This will stop and remove all containers, images (db + app) + volumes and database data created during the DB migrations.
+
+While running this make command, do not forget about setting the variable IMAGE_VERSION. Remember to refer to the flask app image version that exists in the repository!
+
+## Testing
+
+1. To run the application tests (you can run them whenever you want), run:
+
+```sh
+make run_tests
+```

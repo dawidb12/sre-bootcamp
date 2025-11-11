@@ -27,6 +27,9 @@ run_app_container: build_app_image
 
 run_everything: run_db_container run_app_container
 
+start_compose:
+	docker compose up
+
 stop_compose:
 	docker compose down
 
