@@ -29,7 +29,6 @@ install_pip() {
 install_docker() {
     if [[ $pkg_manager == "apt" ]]; then
         sudo $pkg_manager install -y apt-transport-https ca-certificates curl gpg software-properties-common gnupg
-        echo "...Dodawanie klucza gpg..."
         curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
         sudo add-apt-repository -y "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
         sudo $pkg_manager update
