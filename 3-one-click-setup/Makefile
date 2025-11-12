@@ -10,14 +10,26 @@ run_prerequisites:
 	pip3 install -r app/requirements.txt --break-system-packages
 
 prepare_db: run_prerequisites
-	cd app/ && \
-	flask db init && \
-	flask db migrate -m "Create student table" && \
-	rm .env
+	if [ -d app/migrations ] && [ -d app/instance ]; then \
+		echo "Database already migrated!"; \
+	else \
+		cd app/ && \
+		flask db init && \
+		flask db migrate -m "Create student table" && \
+		rm .env; \
+	fi
 
 run_db_container: prepare_db
-	pwd
-	docker compose up -d flask_db
+	OUTPUT_PS=$$(docker ps --format 'table {{.Names}}' | grep -i flask_db) && \
+	if [ -z "$$OUTPUT_PS" ]; then \
+		docker compose up -d flask_db; \
+	fi; \
+	OUTPUT_INSPECT=$$(docker inspect flask_db --format '{{.State.Status}}' 2>/dev/null); \
+	if [ "$$OUTPUT_INSPECT" = "running" ]; then \
+    	echo "The DB container is running!"; \
+	else \
+		docker compose up -d flask_db; \
+	fi
 
 build_app_image:
 	docker compose build

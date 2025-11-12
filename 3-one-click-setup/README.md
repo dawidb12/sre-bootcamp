@@ -26,6 +26,14 @@ make run_db_container
 make run_app_container
 ```
 
+## All-in-one
+
+1. If you want to run everything in correct order (without the preparation script), you can use one command:
+
+```sh
+make run_everything
+```
+
 ## Starting/stopping the stack
 
 1. To start the whole compose, run:
