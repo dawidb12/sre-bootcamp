@@ -2,7 +2,8 @@ IMAGE_VERSION ?= $(error Nie podałeś wartości dla IMAGE_VERSION! Podaj ją w 
 
 run_tests: run_prerequisites
 	cd app/ && \
-	pytest -v
+	pytest -v && \
+	rm -r .pytest_cache __pycache__
 
 run_prerequisites:
 	touch app/.env
@@ -46,6 +47,6 @@ stop_compose:
 	docker compose down
 
 delete_everything:
+	rm -r app/__pycache__ app/migrations app/instance app/*.log
 	docker compose down -v
 	docker rmi student-api:$(IMAGE_VERSION)
-	rm -r app/__pycache__ app/migrations app/instance app/*.log
