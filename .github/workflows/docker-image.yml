@@ -1,0 +1,23 @@
+name: Docker Image CI pipeline
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+defaults:
+  run:
+    working-directory: 4-ci-pipeline
+
+jobs:
+  build:
+    runs-on: [self-hosted]
+    steps:
+    - uses: actions/checkout@v4
+    - name: Create a dummy file on /home/vagrant folder
+      run: | 
+        touch /home/vagrant/new_file.txt
+        touch new_repo_file.txt
+    # - name: Build the Docker image
+    #   run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
