@@ -39,4 +39,4 @@ jobs:
       with:
         context: 4-ci-pipeline
         push: true
-        tags: ${{ vars.DOCKERHUB_USERNAME }}/student-api:1.0.0
+        tags: ${{ vars.DOCKERHUB_USERNAME }}/student-api:1.0.1

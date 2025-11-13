@@ -1,8 +1,8 @@
 services:
   flask_app:
     container_name: flask_app
-    image: student-api:1.0.0
-    build: .
+    image: motov547/student-api:1.0.1
+    # build: .
     ports:
       - "5000:5000"
     environment:
