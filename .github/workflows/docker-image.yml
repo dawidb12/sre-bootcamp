@@ -37,6 +37,6 @@ jobs:
     - name: Build and push
       uses: docker/build-push-action@v6
       with:
-        context: .
+        context: 4-ci-pipeline
         push: true
         tags: ${{ vars.DOCKERHUB_USERNAME }}/student-api:1.0.0
