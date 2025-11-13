@@ -2,7 +2,7 @@ IMAGE_VERSION ?= $(error Nie podałeś wartości dla IMAGE_VERSION! Podaj ją w 
 
 run_tests: run_prerequisites
 	cd app/ && \
-	pytest -v && \
+	python3 -m pytest -v && \
 	rm -r .pytest_cache __pycache__
 
 run_prerequisites:
