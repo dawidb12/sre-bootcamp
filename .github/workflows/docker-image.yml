@@ -37,5 +37,6 @@ jobs:
     - name: Build and push
       uses: docker/build-push-action@v6
       with:
+        context: .
         push: true
         tags: ${{ vars.DOCKERHUB_USERNAME }}/student-api:1.0.0
