@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [ "master" ]
 
+env:
+  IMAGE_NAME: student-api
+  IMAGE_VERSION: 1.0.2
+
 defaults:
   run:
     shell: bash
@@ -39,4 +43,4 @@ jobs:
       with:
         context: 4-ci-pipeline
         push: true
-        tags: ${{ vars.DOCKERHUB_USERNAME }}/student-api:1.0.1
+        tags: ${{ vars.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_VERSION }}
