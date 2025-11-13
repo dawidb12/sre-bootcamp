@@ -8,7 +8,7 @@ on:
 
 env:
   IMAGE_NAME: student-api
-  IMAGE_VERSION: 1.0.2
+  IMAGE_VERSION: 1.0.3
 
 defaults:
   run:
@@ -44,3 +44,6 @@ jobs:
         context: 4-ci-pipeline
         push: true
         tags: ${{ vars.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_VERSION }}
+    - name: Replace the image version with the latest one in Dockerfile
+      run: |
+        sed -i 's|\(image: ${{ vars.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:\).*|\1${{ env.IMAGE_VERSION }}|' docker-compose.yml
