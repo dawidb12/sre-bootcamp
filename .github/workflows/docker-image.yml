@@ -8,6 +8,7 @@ on:
 
 defaults:
   run:
+    shell: bash
     working-directory: 4-ci-pipeline
 
 jobs:
@@ -15,9 +16,8 @@ jobs:
     runs-on: [self-hosted]
     steps:
     - uses: actions/checkout@v4
-    - name: Create a dummy file on /home/vagrant folder
+    - name: Build API
       run: | 
-        touch /home/vagrant/new_file.txt
-        touch new_repo_file.txt
+        make run_prerequisites
     # - name: Build the Docker image
     #   run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
