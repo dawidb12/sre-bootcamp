@@ -5,6 +5,12 @@ run_tests: run_prerequisites
 	python3 -m pytest -v && \
 	rm -r .pytest_cache __pycache__
 
+run_lint: run_prerequisites
+	python3 -m pylint -E app/*.py && \
+	if [ $$? -eq 0 ]; then \
+		echo "No errors in the code!"; \
+	fi
+
 run_prerequisites:
 	touch app/.env
 	echo "DATABASE_URI=sqlite:///data.db" > app/.env
