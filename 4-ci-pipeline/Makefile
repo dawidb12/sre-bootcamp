@@ -15,8 +15,8 @@ prepare_db: run_prerequisites
 		echo "Database already migrated!"; \
 	else \
 		cd app/ && \
-		flask db init && \
-		flask db migrate -m "Create student table" && \
+		python3 -m flask db init && \
+		python3 -m flask db migrate -m "Create student table" && \
 		rm .env; \
 	fi
 
