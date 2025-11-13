@@ -22,5 +22,8 @@ jobs:
     - name: Run tests
       run: |
         make run_tests
+    - name: Run linter
+      run: |
+        make run_lint
     # - name: Build the Docker image
     #   run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
