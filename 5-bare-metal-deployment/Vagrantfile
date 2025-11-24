@@ -1,0 +1,16 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+
+  config.vm.box = "bento/ubuntu-24.04"
+  config.vm.hostname = "bare-metal"
+  config.vm.provider "virtualbox" do |vb|
+    vb.memory = 2048
+    vb.cpus = 2
+  end
+  config.vm.network "private_network", ip: "192.168.60.102"
+  config.vm.network "forwarded_port", guest: 22, host: 2211, id: "ssh"
+  config.ssh.forward_agent = true
+  config.vm.provision "shell", path: "prepare_env.sh"
+end
