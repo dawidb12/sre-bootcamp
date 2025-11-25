@@ -1,4 +1,4 @@
-IMAGE_VERSION ?= $(error Nie podałeś wartości dla IMAGE_VERSION! Podaj ją w komendzie make, np. make <funkcja> "IMAGE_VERSION=1.0.0")
+IMAGE_VERSION ?= $(error You didn't specify a value for IMAGE_VERSION! Specify it in the make command, e.g. make <function> "IMAGE_VERSION=1.0.0")
 
 run_tests: run_prerequisites
 	cd app/ && \
@@ -42,9 +42,9 @@ build_app_image:
 	docker compose build
 
 run_app_container: build_app_image
-	docker compose up -d flask_app
+	docker compose up -d flask_app1 flask_app2
 
-run_everything: run_db_container run_app_container
+run_everything: run_db_container run_app_container start_compose
 
 start_compose:
 	docker compose up -d
@@ -55,4 +55,4 @@ stop_compose:
 delete_everything:
 	rm -r app/__pycache__ app/migrations app/instance app/*.log
 	docker compose down -v
-	docker rmi student-api:$(IMAGE_VERSION)
+	docker rmi motov547/student-api:$(IMAGE_VERSION)

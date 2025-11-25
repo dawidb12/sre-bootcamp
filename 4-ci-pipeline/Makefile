@@ -55,4 +55,4 @@ stop_compose:
 delete_everything:
 	rm -r app/__pycache__ app/migrations app/instance app/*.log
 	docker compose down -v
-	docker rmi student-api:$(IMAGE_VERSION)
+	docker rmi motov547/student-api:$(IMAGE_VERSION)
