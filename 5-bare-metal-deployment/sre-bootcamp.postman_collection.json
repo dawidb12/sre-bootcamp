@@ -13,12 +13,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5000/api/v1/data",
+					"raw": "http://localhost:8080/api/v1/data",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "5000",
+					"port": "8080",
 					"path": [
 						"api",
 						"v1",
@@ -34,12 +34,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5000/api/v1/data/3",
+					"raw": "http://localhost:8080/api/v1/data/3",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "5000",
+					"port": "8080",
 					"path": [
 						"api",
 						"v1",
@@ -65,12 +65,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5000/api/v1/data/create",
+					"raw": "http://localhost:8080/api/v1/data/create",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "5000",
+					"port": "8080",
 					"path": [
 						"api",
 						"v1",
@@ -96,12 +96,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5000/api/v1/data/4/update",
+					"raw": "http://localhost:8080/api/v1/data/4/update",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "5000",
+					"port": "8080",
 					"path": [
 						"api",
 						"v1",
@@ -119,12 +119,12 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5000/api/v1/data/3/delete",
+					"raw": "http://localhost:8080/api/v1/data/3/delete",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "5000",
+					"port": "8080",
 					"path": [
 						"api",
 						"v1",
